@@ -3,68 +3,186 @@
   "window_start_utc": "2026-02-28 15:00",
   "window_end_utc": "2026-03-01 15:00",
   "summary": {
-    "regime": "混在（株は小動き、金利・為替は方向感薄）",
+    "regime": "混在（株は小幅、金利・為替は方向感が限定的）",
     "key_drivers": [
-      "ダミーデータ：米金利は横ばい、株価指数も小幅",
-      "ダミーデータ：リスクオン/オフのシグナルが揃わず"
+      "UI確認用ダミー：米株はハイテク優位、ディフェンシブは相対弱め",
+      "UI確認用ダミー：米金利はレンジ、ドル円も小動き",
+      "UI確認用ダミー：原油は小幅上昇、金は横ばい",
+      "UI確認用ダミー：VIXは小幅低下",
+      "未確認: 重要イベントの発生有無（入力データ未提供）"
     ],
     "unknowns": [
-      "未確認: 重要イベントの発生有無（入力データ未提供）"
+      "未確認: 主要マクロ発表の“実績値”と市場予想（入力データ未提供）",
+      "未確認: 個別株の材料（公式ソースURL未提供）"
+    ]
+  },
+  "cross_asset": {
+    "rates": [
+      { "name": "US10Y", "level": "4.12", "move_bp": "-2.0", "note": "ダミー" },
+      { "name": "US2Y", "level": "4.48", "move_bp": "1.0", "note": "ダミー" },
+      { "name": "JP10Y", "level": "1.05", "move_bp": "1.5", "note": "ダミー" }
+    ],
+    "fx": [
+      { "name": "USDJPY", "level": "150.20", "move_pct": "0.10", "note": "ダミー" },
+      { "name": "EURUSD", "level": "1.082", "move_pct": "-0.05", "note": "ダミー" }
+    ],
+    "commodities": [
+      { "name": "WTI", "level": "78.40", "move_pct": "0.60", "note": "ダミー" },
+      { "name": "Gold", "level": "2055", "move_pct": "0.05", "note": "ダミー" }
+    ],
+    "volatility": [
+      { "name": "VIX", "level": "14.8", "move_pct": "-1.20", "note": "ダミー" }
     ]
   },
   "us": {
     "indices": [
-      { "name": "S&P 500", "move_pct": "0.35", "note": "ダミー" },
-      { "name": "NASDAQ 100", "move_pct": "0.52", "note": "ダミー" },
-      { "name": "Dow Jones", "move_pct": "0.10", "note": "ダミー" }
+      { "name": "S&P 500", "level": "5200.10", "change_abs": "18.20", "move_pct": "0.35", "note": "UI確認用ダミー" },
+      { "name": "NASDAQ 100", "level": "18350.50", "change_abs": "95.10", "move_pct": "0.52", "note": "UI確認用ダミー" },
+      { "name": "Dow Jones", "level": "38990.80", "change_abs": "38.90", "move_pct": "0.10", "note": "UI確認用ダミー" },
+      { "name": "Russell 2000", "level": "2055.20", "change_abs": "-2.10", "move_pct": "-0.10", "note": "UI確認用ダミー" }
     ],
     "sectors": [
-      { "name": "Technology", "move_pct": "0.80", "rank": 1 },
-      { "name": "Communication Services", "move_pct": "0.45", "rank": 2 },
-      { "name": "Health Care", "move_pct": "-0.20", "rank": 11 }
+      { "ticker": "XLK", "sector": "Technology", "move_pct": "0.90", "rank": 1 },
+      { "ticker": "XLC", "sector": "Communication Services", "move_pct": "0.70", "rank": 2 },
+      { "ticker": "XLY", "sector": "Consumer Discretionary", "move_pct": "0.55", "rank": 3 },
+      { "ticker": "XLI", "sector": "Industrials", "move_pct": "0.30", "rank": 4 },
+      { "ticker": "XLF", "sector": "Financials", "move_pct": "0.25", "rank": 5 },
+      { "ticker": "XLB", "sector": "Materials", "move_pct": "0.18", "rank": 6 },
+      { "ticker": "XLV", "sector": "Health Care", "move_pct": "0.05", "rank": 7 },
+      { "ticker": "XLP", "sector": "Consumer Staples", "move_pct": "-0.05", "rank": 8 },
+      { "ticker": "XLRE", "sector": "Real Estate", "move_pct": "-0.12", "rank": 9 },
+      { "ticker": "XLE", "sector": "Energy", "move_pct": "-0.20", "rank": 10 },
+      { "ticker": "XLU", "sector": "Utilities", "move_pct": "-0.30", "rank": 11 }
     ],
     "notable_movers": [
       {
         "ticker": "NVDA",
+        "price": "900.10",
         "move_pct": "2.10",
+        "volume": "52.3M",
         "type": "technical",
-        "catalyst": "未確認",
+        "catalyst": "未確認（UI確認用）",
         "sources": []
       },
       {
         "ticker": "TSLA",
+        "price": "205.30",
         "move_pct": "-1.70",
+        "volume": "98.1M",
         "type": "technical",
-        "catalyst": "未確認",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "AAPL",
+        "price": "189.20",
+        "move_pct": "1.05",
+        "volume": "61.2M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "MSFT",
+        "price": "412.40",
+        "move_pct": "0.80",
+        "volume": "28.4M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "AMZN",
+        "price": "178.10",
+        "move_pct": "0.65",
+        "volume": "44.6M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "META",
+        "price": "485.60",
+        "move_pct": "1.20",
+        "volume": "18.2M",
+        "type": "technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "GOOGL",
+        "price": "152.40",
+        "move_pct": "-0.40",
+        "volume": "25.0M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "JPM",
+        "price": "182.20",
+        "move_pct": "0.55",
+        "volume": "10.1M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "XOM",
+        "price": "105.30",
+        "move_pct": "-0.85",
+        "volume": "19.8M",
+        "type": "flow/technical",
+        "catalyst": "未確認（UI確認用）",
+        "sources": []
+      },
+      {
+        "ticker": "PLTR",
+        "price": "25.80",
+        "move_pct": "3.40",
+        "volume": "72.4M",
+        "type": "technical",
+        "catalyst": "未確認（UI確認用）",
         "sources": []
       }
     ]
   },
   "jp": {
     "indices": [
-      { "name": "Nikkei 225", "move_pct": "-0.25", "note": "ダミー" },
-      { "name": "TOPIX", "move_pct": "0.05", "note": "ダミー" }
+      { "name": "Nikkei 225", "level": "38550.10", "change_abs": "-96.20", "move_pct": "-0.25", "note": "UI確認用ダミー" },
+      { "name": "TOPIX", "level": "2688.40", "change_abs": "1.30", "move_pct": "0.05", "note": "UI確認用ダミー" },
+      { "name": "JPX400", "level": "24350.00", "change_abs": "9.20", "move_pct": "0.04", "note": "UI確認用ダミー" }
     ],
     "sectors": [
-      { "name": "TOPIX-33: 電機", "move_pct": "0.60", "rank": 1 },
-      { "name": "TOPIX-33: 銀行", "move_pct": "0.20", "rank": 2 },
-      { "name": "TOPIX-33: 不動産", "move_pct": "-0.30", "rank": 10 }
+      { "ticker": "1617", "sector": "食品（TOPIX-17）", "move_pct": "0.22", "rank": 9 },
+      { "ticker": "1618", "sector": "エネルギー資源（TOPIX-17）", "move_pct": "0.58", "rank": 3 },
+      { "ticker": "1619", "sector": "建設・資材（TOPIX-17）", "move_pct": "0.35", "rank": 6 },
+      { "ticker": "1620", "sector": "素材・化学（TOPIX-17）", "move_pct": "0.28", "rank": 7 },
+      { "ticker": "1621", "sector": "医薬品（TOPIX-17）", "move_pct": "-0.10", "rank": 14 },
+      { "ticker": "1622", "sector": "自動車・輸送機（TOPIX-17）", "move_pct": "0.40", "rank": 5 },
+      { "ticker": "1623", "sector": "鉄鋼・非鉄（TOPIX-17）", "move_pct": "0.62", "rank": 2 },
+      { "ticker": "1624", "sector": "機械（TOPIX-17）", "move_pct": "0.18", "rank": 10 },
+      { "ticker": "1625", "sector": "電機・精密（TOPIX-17）", "move_pct": "0.75", "rank": 1 },
+      { "ticker": "1626", "sector": "IT・サービス等（TOPIX-17）", "move_pct": "0.50", "rank": 4 },
+      { "ticker": "1627", "sector": "電力・ガス（TOPIX-17）", "move_pct": "-0.22", "rank": 16 },
+      { "ticker": "1628", "sector": "運輸・物流（TOPIX-17）", "move_pct": "-0.05", "rank": 13 },
+      { "ticker": "1629", "sector": "商社・卸売（TOPIX-17）", "move_pct": "0.30", "rank": 8 },
+      { "ticker": "1630", "sector": "小売（TOPIX-17）", "move_pct": "-0.12", "rank": 15 },
+      { "ticker": "1631", "sector": "銀行（TOPIX-17）", "move_pct": "0.12", "rank": 11 },
+      { "ticker": "1632", "sector": "金融（除く銀行）（TOPIX-17）", "move_pct": "0.08", "rank": 12 },
+      { "ticker": "1633", "sector": "不動産（TOPIX-17）", "move_pct": "-0.25", "rank": 17 }
     ],
     "notable_movers": [
-      {
-        "ticker": "7203.T",
-        "move_pct": "1.20",
-        "type": "technical",
-        "catalyst": "未確認",
-        "sources": []
-      },
-      {
-        "ticker": "9984.T",
-        "move_pct": "-0.90",
-        "type": "technical",
-        "catalyst": "未確認",
-        "sources": []
-      }
+      { "ticker": "7203.T", "price": "3200", "move_pct": "1.20", "volume": "12.0M", "type": "technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "9984.T", "price": "7800", "move_pct": "-0.90", "volume": "6.1M", "type": "technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "8035.T", "price": "37500", "move_pct": "1.80", "volume": "1.8M", "type": "flow/technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "6758.T", "price": "14000", "move_pct": "-1.10", "volume": "2.2M", "type": "technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "6098.T", "price": "13000", "move_pct": "2.40", "volume": "1.1M", "type": "technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "8306.T", "price": "1200", "move_pct": "0.55", "volume": "18.9M", "type": "flow/technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "4063.T", "price": "5200", "move_pct": "1.05", "volume": "0.9M", "type": "flow/technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "9432.T", "price": "180", "move_pct": "-0.35", "volume": "55.0M", "type": "flow/technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "9101.T", "price": "4700", "move_pct": "0.80", "volume": "4.2M", "type": "flow/technical", "catalyst": "未確認（UI確認用）", "sources": [] },
+      { "ticker": "3402.T", "price": "980", "move_pct": "-0.60", "volume": "7.7M", "type": "technical", "catalyst": "未確認（UI確認用）", "sources": [] }
     ]
   }
 }
