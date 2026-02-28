@@ -1,0 +1,70 @@
+{
+  "date_jst": "2026-03-01",
+  "window_start_utc": "2026-02-28 15:00",
+  "window_end_utc": "2026-03-01 15:00",
+  "summary": {
+    "regime": "混在（株は小動き、金利・為替は方向感薄）",
+    "key_drivers": [
+      "ダミーデータ：米金利は横ばい、株価指数も小幅",
+      "ダミーデータ：リスクオン/オフのシグナルが揃わず"
+    ],
+    "unknowns": [
+      "未確認: 重要イベントの発生有無（入力データ未提供）"
+    ]
+  },
+  "us": {
+    "indices": [
+      { "name": "S&P 500", "move_pct": "0.35", "note": "ダミー" },
+      { "name": "NASDAQ 100", "move_pct": "0.52", "note": "ダミー" },
+      { "name": "Dow Jones", "move_pct": "0.10", "note": "ダミー" }
+    ],
+    "sectors": [
+      { "name": "Technology", "move_pct": "0.80", "rank": 1 },
+      { "name": "Communication Services", "move_pct": "0.45", "rank": 2 },
+      { "name": "Health Care", "move_pct": "-0.20", "rank": 11 }
+    ],
+    "notable_movers": [
+      {
+        "ticker": "NVDA",
+        "move_pct": "2.10",
+        "type": "technical",
+        "catalyst": "未確認",
+        "sources": []
+      },
+      {
+        "ticker": "TSLA",
+        "move_pct": "-1.70",
+        "type": "technical",
+        "catalyst": "未確認",
+        "sources": []
+      }
+    ]
+  },
+  "jp": {
+    "indices": [
+      { "name": "Nikkei 225", "move_pct": "-0.25", "note": "ダミー" },
+      { "name": "TOPIX", "move_pct": "0.05", "note": "ダミー" }
+    ],
+    "sectors": [
+      { "name": "TOPIX-33: 電機", "move_pct": "0.60", "rank": 1 },
+      { "name": "TOPIX-33: 銀行", "move_pct": "0.20", "rank": 2 },
+      { "name": "TOPIX-33: 不動産", "move_pct": "-0.30", "rank": 10 }
+    ],
+    "notable_movers": [
+      {
+        "ticker": "7203.T",
+        "move_pct": "1.20",
+        "type": "technical",
+        "catalyst": "未確認",
+        "sources": []
+      },
+      {
+        "ticker": "9984.T",
+        "move_pct": "-0.90",
+        "type": "technical",
+        "catalyst": "未確認",
+        "sources": []
+      }
+    ]
+  }
+}
