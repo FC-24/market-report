@@ -4,25 +4,638 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Market Report</title>
-  <link rel="stylesheet" href="./assets/style.css" />
+  <meta name="description" content="Daily market analysis, individual stock research and news analysis" />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#0f1730;
+      --panel2:#121c3a;
+      --text:#e7ecff;
+      --muted:#b8c0e6;
+      --line:rgba(255,255,255,.10);
+      --accent:#6ea8ff;
+      --good:#4ade80;
+      --bad:#fb7185;
+      --warn:#fbbf24;
+      --chip:#1b2a57;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+      --maxw: 1080px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(110,168,255,.20), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(251,191,36,.12), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+      line-height:1.6;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:24px 18px 60px}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,16,32,.78);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{max-width:var(--maxw); margin:0 auto; padding:14px 18px}
+    .title-row{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .title{
+      font-size:20px; font-weight:800; letter-spacing:.2px;
+    }
+    .subtitle{
+      color:var(--muted); font-size:13px;
+    }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:13px;
+    }
+    .pill b{font-weight:800}
+    .pill .count{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:22px; height:18px; padding:0 6px;
+      border-radius:999px;
+      background: rgba(110,168,255,.20);
+      border:1px solid rgba(110,168,255,.35);
+      font-weight:800;
+      font-size:12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (min-width: 980px){
+      .grid.two{grid-template-columns: 1fr 1fr}
+    }
+
+    section{scroll-margin-top:110px}
+    .section-head{
+      display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin:28px 0 10px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .section-meta{color:var(--muted); font-size:13px}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px 14px;
+    }
+    .card h3{margin:0 0 8px; font-size:15px}
+    .muted{color:var(--muted)}
+    .chip-row{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(27,42,87,.6);
+      color:var(--text);
+      font-size:12px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      font-weight:800;
+    }
+    .badge .dot{width:10px;height:10px;border-radius:999px;background:var(--warn)}
+    .badge.good .dot{background:var(--good)}
+    .badge.bad .dot{background:var(--bad)}
+    .badge.warn .dot{background:var(--warn)}
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    th,td{padding:10px 10px; text-align:left; font-size:13px; border-bottom:1px solid var(--line)}
+    th{color:var(--muted); font-weight:700; background: rgba(255,255,255,.03)}
+    tr:last-child td{border-bottom:none}
+    .num{text-align:right; font-variant-numeric: tabular-nums;}
+    .pos{color:var(--good); font-weight:800}
+    .neg{color:var(--bad); font-weight:800}
+    .rowclick tbody tr{cursor:pointer}
+    .rowclick tbody tr:hover{background: rgba(110,168,255,.08)}
+    .small{font-size:12px}
+    .footnote{margin-top:10px; color:var(--muted); font-size:12px}
+    .divider{height:1px; background:var(--line); margin:18px 0}
+
+    .news-item{
+      display:grid; gap:8px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .tag{
+      display:inline-flex; align-items:center;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(110,168,255,.35);
+      background: rgba(110,168,255,.18);
+      width:fit-content;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .news-title{margin:0; font-size:15px}
+    .kv{display:flex; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:12px}
+    .kv span{padding:4px 8px; border:1px solid var(--line); border-radius:999px; background: rgba(255,255,255,.03)}
+
+    details{
+      border:1px solid var(--line);
+      border-radius:14px;
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:12px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    summary::-webkit-details-marker{display:none}
+    .sum-left{display:flex; flex-direction:column; gap:2px}
+    .sum-title{font-weight:900}
+    .sum-sub{color:var(--muted); font-size:12px}
+    .details-body{padding:0 14px 14px}
+    .warnline{
+      margin-top:20px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(251,191,36,.35);
+      background: rgba(251,191,36,.12);
+      color:#fff7d6;
+      font-size:12px;
+    }
+
+    /* Modal (TradingView) */
+    .modal{
+      position:fixed; inset:0; z-index:50;
+      background: rgba(0,0,0,.6);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+    }
+    .modal.open{display:flex}
+    .modal-box{
+      width:min(1100px, 100%);
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modal-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .modal-title{font-weight:900}
+    .btn{
+      appearance:none; border:none;
+      background: rgba(255,255,255,.08);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:800;
+    }
+    .btn:hover{background: rgba(255,255,255,.12)}
+    .modal-body{padding:12px 14px}
+    iframe{width:100%; height:560px; border:0; border-radius:14px; background:#000}
+    @media (max-width: 720px){
+      iframe{height:440px}
+    }
+  </style>
 </head>
+
 <body>
-  <header class="header">
-    <h1>デイリー市場レポート</h1>
-    <div id="reportMeta" class="meta">読み込み中...</div>
-    <nav class="nav">
-      <a href="#market">マーケットダッシュボード</a>
-      <a href="#news">ニュースブリーフ</a>
-      <a href="#earnings">決算ダイジェスト</a>
-    </nav>
-  </header>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="title-row">
+        <div>
+          <div class="title">デイリー市場レポート</div>
+          <div class="subtitle" id="topDate">読み込み中...</div>
+        </div>
+        <div class="subtitle" id="topWindow">—</div>
+      </div>
 
-  <main class="container">
-    <section id="market"><h2>マーケットダッシュボード</h2><div class="loading">読み込み中...</div></section>
-    <section id="news"><h2>ニュースブリーフ</h2><div class="loading">読み込み中...</div></section>
-    <section id="earnings"><h2>決算ダイジェスト</h2><div class="loading">読み込み中...</div></section>
-  </main>
+      <div class="nav">
+        <a class="pill" href="#market"><b>マーケットダッシュボード</b></a>
+        <a class="pill" href="#top"><b>TOP</b></a>
+        <a class="pill" href="#news"><b>ニュースブリーフ</b> <span class="count" id="newsCount">—</span></a>
+        <a class="pill" href="#earnings"><b>決算ダイジェスト</b> <span class="count" id="earningsCount">—</span></a>
+      </div>
+    </div>
+  </div>
 
-  <script type="module" src="./assets/app.js"></script>
+  <a id="top"></a>
+  <div class="wrap">
+
+    <!-- MARKET -->
+    <section id="market">
+      <div class="section-head">
+        <h2>マーケットダッシュボード</h2>
+        <div class="section-meta" id="marketTarget">対象日時: —</div>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>マーケットレジーム</h3>
+          <div id="regimeBadge" class="badge warn"><span class="dot"></span><span id="regimeText">—</span></div>
+          <div class="divider"></div>
+          <h3>主要ドライバー</h3>
+          <div class="chip-row" id="drivers">読み込み中...</div>
+        </div>
+
+        <div class="card">
+          <h3>主要指数</h3>
+          <div class="grid" style="margin-top:10px">
+            <div>
+              <div class="muted small" style="margin-bottom:8px">米国主要指数</div>
+              <table id="usIndices">
+                <thead><tr><th>指数</th><th class="num">変化率</th><th>メモ</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div style="margin-top:12px">
+              <div class="muted small" style="margin-bottom:8px">日本主要指数</div>
+              <table id="jpIndices">
+                <thead><tr><th>指数</th><th class="num">変化率</th><th>メモ</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>セクター動向 <span class="muted small">クリックでTradingViewを表示</span></h3>
+          <div class="muted small" style="margin:10px 0 8px">米国（S&P500 セクター）</div>
+          <table class="rowclick" id="usSectors">
+            <thead><tr><th>ティッカー</th><th>セクター</th><th class="num">騰落率</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <div class="footnote">※ クリックでTradingViewを確認できます（埋め込みが表示できない場合はリンクで開きます）。</div>
+        </div>
+
+        <div class="card">
+          <h3>セクター動向 <span class="muted small">クリックでTradingViewを表示</span></h3>
+          <div class="muted small" style="margin:10px 0 8px">日本（TOPIXセクター）</div>
+          <table class="rowclick" id="jpSectors">
+            <thead><tr><th>ティッカー</th><th>セクター</th><th class="num">騰落率</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>注目銘柄（米国）</h3>
+          <table id="usMovers">
+            <thead><tr><th>銘柄</th><th class="num">変化率</th><th>タイプ</th><th>背景</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>注目銘柄（日本）</h3>
+          <table id="jpMovers">
+            <thead><tr><th>銘柄</th><th class="num">変化率</th><th>タイプ</th><th>背景</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="warnline">
+        market_dashboard_v1 準拠（JSON） / ⚠️ 本レポートは情報提供のみ。投資判断は自己責任で。
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news">
+      <div class="section-head">
+        <h2>ニュースブリーフ</h2>
+        <div class="section-meta" id="newsTarget">対象: —</div>
+      </div>
+
+      <div class="grid" id="newsList">読み込み中...</div>
+
+      <div class="warnline">
+        news_brief_v1 準拠（JSON） / ⚠️ 本レポートは情報提供のみ。投資判断は自己責任で。
+      </div>
+    </section>
+
+    <!-- EARNINGS -->
+    <section id="earnings">
+      <div class="section-head">
+        <h2>決算ダイジェスト</h2>
+        <div class="section-meta" id="earningsTarget">対象: —</div>
+      </div>
+
+      <div class="grid" id="earningsList">読み込み中...</div>
+
+      <div class="warnline">
+        earnings_digest_v1 準拠（JSON） / ⚠️ 本レポートは情報提供のみ。投資判断は自己責任で。
+      </div>
+    </section>
+
+  </div>
+
+  <!-- TradingView Modal -->
+  <div class="modal" id="tvModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div class="modal-title" id="tvTitle">TradingView</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <a class="btn" id="tvOpen" href="#" target="_blank" rel="noopener">TradingViewで開く ↗</a>
+          <button class="btn" id="tvClose">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="tvFrame" title="TradingView chart"></iframe>
+        <div class="footnote">データはTradingView提供。遅延の場合あり。</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- helpers ----------
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (m) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+    const pctClass = (v) => {
+      const n = Number(v);
+      if (Number.isNaN(n)) return "";
+      return n >= 0 ? "pos" : "neg";
+    };
+    const fmtPct = (v) => {
+      if (v === null || v === undefined || v === "") return "—";
+      const n = Number(v);
+      if (Number.isNaN(n)) return esc(v);
+      return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
+    };
+    const nowBust = () => "v=" + Date.now();
+    async function fetchJson(path){
+      const res = await fetch(path + (path.includes("?") ? "&" : "?") + nowBust(), { cache: "no-store" });
+      if(!res.ok) throw new Error(path + " fetch failed: " + res.status);
+      return res.json();
+    }
+
+    // ---------- TradingView modal ----------
+    const tvModal = document.getElementById("tvModal");
+    const tvFrame = document.getElementById("tvFrame");
+    const tvTitle = document.getElementById("tvTitle");
+    const tvOpen  = document.getElementById("tvOpen");
+    const tvClose = document.getElementById("tvClose");
+
+    function openTV(symbol){
+      // TradingView embed (動かない環境もあるので、リンクも用意)
+      const urlOpen = "https://www.tradingview.com/chart/?symbol=" + encodeURIComponent(symbol);
+      const urlEmbed = "https://s.tradingview.com/widgetembed/?symbol=" + encodeURIComponent(symbol)
+        + "&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=%5B%5D"
+        + "&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1";
+
+      tvTitle.textContent = "TradingView — " + symbol;
+      tvOpen.href = urlOpen;
+      tvFrame.src = urlEmbed;
+      tvModal.classList.add("open");
+      tvModal.setAttribute("aria-hidden","false");
+    }
+    function closeTV(){
+      tvModal.classList.remove("open");
+      tvModal.setAttribute("aria-hidden","true");
+      tvFrame.src = "";
+    }
+    tvClose.addEventListener("click", closeTV);
+    tvModal.addEventListener("click", (e) => { if(e.target === tvModal) closeTV(); });
+    window.addEventListener("keydown", (e) => { if(e.key === "Escape") closeTV(); });
+
+    // ---------- render ----------
+    function fillTable(tbody, rows){
+      tbody.innerHTML = rows.join("");
+    }
+
+    function renderMarket(market){
+      document.getElementById("topDate").textContent = (market.date_jst ?? "—") + " JST";
+      document.getElementById("topWindow").textContent = "UTC: " + (market.window_start_utc ?? "—") + " → " + (market.window_end_utc ?? "—");
+      document.getElementById("marketTarget").textContent = "対象日時: " + (market.date_jst ?? "—") + "（JST） / UTC: " + (market.window_start_utc ?? "—") + " → " + (market.window_end_utc ?? "—");
+
+      // regime badge color heuristic（文言に応じて色を変えるだけ。中身の判断はJSON側）
+      const regime = market?.summary?.regime ?? "—";
+      const badge = document.getElementById("regimeBadge");
+      const lower = String(regime).toLowerCase();
+      badge.classList.remove("good","bad","warn");
+      if (regime.includes("リスクオン") || lower.includes("risk-on")) badge.classList.add("good");
+      else if (regime.includes("リスクオフ") || lower.includes("risk-off")) badge.classList.add("bad");
+      else badge.classList.add("warn");
+      document.getElementById("regimeText").textContent = regime;
+
+      const drivers = market?.summary?.key_drivers ?? [];
+      document.getElementById("drivers").innerHTML =
+        drivers.length
+          ? drivers.map(x => `<span class="chip">${esc(x)}</span>`).join("")
+          : `<span class="muted">未確認（key_drivers が空）</span>`;
+
+      // indices
+      const usIdxBody = document.querySelector("#usIndices tbody");
+      const jpIdxBody = document.querySelector("#jpIndices tbody");
+
+      const toIdxRow = (x) => {
+        const pct = x.move_pct ?? x.pct ?? x.change_pct ?? "";
+        return `<tr>
+          <td>${esc(x.name ?? "—")}</td>
+          <td class="num ${pctClass(pct)}">${fmtPct(pct)}</td>
+          <td class="muted">${esc(x.note ?? "")}</td>
+        </tr>`;
+      };
+
+      fillTable(usIdxBody, (market?.us?.indices ?? []).map(toIdxRow));
+      fillTable(jpIdxBody, (market?.jp?.indices ?? []).map(toIdxRow));
+
+      // sectors (クリックでTradingView)
+      const usSecBody = document.querySelector("#usSectors tbody");
+      const jpSecBody = document.querySelector("#jpSectors tbody");
+
+      const toSectorRow = (x, fallbackPrefix) => {
+        const ticker = x.ticker ?? x.symbol ?? "";
+        const sector = x.sector ?? x.name ?? "—";
+        const pct = x.move_pct ?? x.return_pct ?? x.pct ?? "";
+        // tickerが無い場合はクリックできない（見た目だけ）
+        const dataSymbol = ticker ? ` data-symbol="${esc(ticker)}"` : "";
+        return `<tr${dataSymbol}>
+          <td>${esc(ticker || "—")}</td>
+          <td>${esc(sector)}</td>
+          <td class="num ${pctClass(pct)}">${fmtPct(pct)}</td>
+        </tr>`;
+      };
+
+      fillTable(usSecBody, (market?.us?.sectors ?? []).map(x => toSectorRow(x, "US")));
+      fillTable(jpSecBody, (market?.jp?.sectors ?? []).map(x => toSectorRow(x, "JP")));
+
+      // attach click handler
+      function attachTV(tableId){
+        const table = document.getElementById(tableId);
+        table.querySelectorAll("tbody tr").forEach(tr => {
+          const sym = tr.getAttribute("data-symbol");
+          if(!sym) return;
+          tr.addEventListener("click", () => openTV(sym));
+        });
+      }
+      attachTV("usSectors");
+      attachTV("jpSectors");
+
+      // movers
+      const usMovBody = document.querySelector("#usMovers tbody");
+      const jpMovBody = document.querySelector("#jpMovers tbody");
+
+      const toMoverRow = (x) => {
+        const pct = x.move_pct ?? x.pct ?? "";
+        const bg  = x.catalyst ?? x.background ?? x.note ?? "未確認";
+        return `<tr>
+          <td>${esc(x.ticker ?? x.name ?? "—")}</td>
+          <td class="num ${pctClass(pct)}">${fmtPct(pct)}</td>
+          <td>${esc(x.type ?? "—")}</td>
+          <td class="muted">${esc(bg)}</td>
+        </tr>`;
+      };
+
+      fillTable(usMovBody, (market?.us?.notable_movers ?? []).map(toMoverRow));
+      fillTable(jpMovBody, (market?.jp?.notable_movers ?? []).map(toMoverRow));
+    }
+
+    function renderNews(news){
+      document.getElementById("newsCount").textContent = (news?.items?.length ?? 0);
+      document.getElementById("newsTarget").textContent =
+        "対象: " + (news.window_start_utc ?? "—") + " → " + (news.window_end_utc ?? "—") + "（UTC）";
+
+      const list = document.getElementById("newsList");
+      const items = news?.items ?? [];
+      if(!items.length){
+        list.innerHTML = `<div class="muted">ニュースがありません（items が空）</div>`;
+        return;
+      }
+      list.innerHTML = items.map(it => {
+        const t = it?.times ?? {};
+        const tickers = (it.tickers ?? []).filter(Boolean);
+        const srcs = (it.sources ?? []).filter(Boolean);
+        return `
+          <div class="news-item">
+            <div class="tag">${esc(it.category ?? "other")}</div>
+            <h3 class="news-title">${esc(it.title ?? "—")}</h3>
+            <div class="kv">
+              <span>公表: ${esc(t.published_utc ?? "未確認")} UTC</span>
+              <span>JST: ${esc(t.published_jst ?? "未確認")}</span>
+              ${tickers.length ? `<span>Tickers: ${esc(tickers.join(", "))}</span>` : ``}
+            </div>
+            <div>${esc(it.what_happened ?? "—")}</div>
+            ${(it.impact_pathway ?? []).length ? `
+              <div class="muted small" style="margin-top:6px"><b>影響経路</b></div>
+              <ul class="small">${(it.impact_pathway ?? []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+            ` : ``}
+            <div class="muted small"><b>事後反応</b>: ${esc(it.ex_post_reaction ?? "未確認")}</div>
+            ${srcs.length ? `
+              <div class="muted small" style="margin-top:6px"><b>ソース</b></div>
+              <ul class="small">${srcs.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">link</a></li>`).join("")}</ul>
+            ` : `<div class="muted small">ソース: 未確認</div>`}
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderEarnings(earn){
+      const items = earn?.items ?? [];
+      document.getElementById("earningsCount").textContent = items.length;
+      document.getElementById("earningsTarget").textContent = "対象: " + (earn.date_jst ?? "—") + "（JST）";
+
+      const list = document.getElementById("earningsList");
+      if(!items.length){
+        list.innerHTML = `<div class="muted">決算がありません（items が空）</div>`;
+        return;
+      }
+
+      list.innerHTML = items.map(it => {
+        const srcs = (it.sources ?? []).filter(Boolean);
+        const highlights = (it.highlights ?? []).filter(Boolean);
+        return `
+          <details>
+            <summary>
+              <div class="sum-left">
+                <div class="sum-title">${esc(it.company ?? "—")} / ${esc(it.ticker ?? "—")}</div>
+                <div class="sum-sub">${esc(it.country ?? "—")} ・ ${esc(it.report_period ?? "—")} ・ 公表(UTC): ${esc(it.release_time_utc ?? "未確認")}</div>
+              </div>
+              <div class="muted small">${esc(it.price_reaction ?? "未確認")}</div>
+            </summary>
+            <div class="details-body">
+              ${highlights.length ? `<ul>${highlights.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="muted">ハイライト: 未確認</div>`}
+              <div class="kv" style="margin-top:10px">
+                <span>vsコンセンサス: ${esc(it.vs_consensus ?? "未確認")}</span>
+                <span>ガイダンス: ${esc(it.guidance ?? "未確認")}</span>
+              </div>
+              ${srcs.length ? `
+                <div class="muted small" style="margin-top:10px"><b>ソース</b></div>
+                <ul class="small">${srcs.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">link</a></li>`).join("")}</ul>
+              ` : `<div class="muted small" style="margin-top:10px">ソース: 未確認</div>`}
+            </div>
+          </details>
+        `;
+      }).join("");
+    }
+
+    // ---------- main ----------
+    (async () => {
+      try{
+        const [market, news, earnings] = await Promise.all([
+          fetchJson("./data/latest/market.json"),
+          fetchJson("./data/latest/news.json"),
+          fetchJson("./data/latest/earnings.json"),
+        ]);
+        renderMarket(market);
+        renderNews(news);
+        renderEarnings(earnings);
+      }catch(e){
+        document.getElementById("topDate").textContent = "読み込み失敗";
+        document.getElementById("topWindow").textContent = e.message;
+        document.getElementById("drivers").innerHTML = `<span class="muted">${esc(e.message)}</span>`;
+        document.getElementById("newsList").innerHTML = `<div class="muted">${esc(e.message)}</div>`;
+        document.getElementById("earningsList").innerHTML = `<div class="muted">${esc(e.message)}</div>`;
+        console.error(e);
+      }
+    })();
+  </script>
 </body>
 </html>
