@@ -1,231 +1,194 @@
 {
   "date_jst": "2026-03-01",
-  "window_start_utc": "2026-02-28 15:00",
-  "window_end_utc": "2026-03-01 15:00",
   "items": [
     {
-      "cluster_id": "ui-001",
-      "title": "UI確認用: 米国マクロ統計の発表（ダミー）",
-      "category": "macro",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 01:00",
-        "published_jst": "2026-03-01 10:00",
-        "event_utc": "2026-03-01 00:30",
-        "event_jst": "2026-03-01 09:30"
+      "company": "Dummy AI Systems",
+      "ticker": "DAIS",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 02:00",
+      "headline_numbers": {
+        "revenue": "12.3B",
+        "eps": "3.21",
+        "gross_margin": "58.0%"
       },
-      "impact_pathway": [
-        "金利 → 株式バリュエーション → 株価指数",
-        "為替 → 輸出企業の利益見通し"
+      "consensus": {
+        "revenue": "12.0B",
+        "eps": "3.05"
+      },
+      "guidance": "未確認（UI確認用）",
+      "key_metrics": {
+        "active_users": "未確認",
+        "backlog": "未確認"
+      },
+      "highlights": [
+        "（ダミー）売上・EPSともに市場予想を上回った想定",
+        "（ダミー）粗利率が改善した想定",
+        "（ダミー）次四半期見通しは未確認"
       ],
-      "ex_post_reaction": "未確認（市場反応データ未提供）",
-      "tickers": [],
-      "sources": ["https://example.com/news/ui-001"]
+      "vs_consensus": "（ダミー）上振れ",
+      "price_reaction": "未確認（市場データ未提供）",
+      "sources": ["https://example.com/earnings/dais"]
     },
     {
-      "cluster_id": "ui-002",
-      "title": "UI確認用: FRB高官コメント（ダミー）",
-      "category": "central_bank",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 02:10",
-        "published_jst": "2026-03-01 11:10",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "政策金利見通し → 米国債利回り → グロース株",
-        "金融環境 → クレジットスプレッド → リスク資産"
+      "company": "Dummy Cloud",
+      "ticker": "DCLD",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 02:10",
+      "headline_numbers": { "revenue": "21.0B", "eps": "2.35" },
+      "consensus": { "revenue": "20.8B", "eps": "2.30" },
+      "guidance": "（ダミー）売上成長率ガイダンスは小幅上方修正の想定",
+      "key_metrics": { "subscription_growth": "未確認", "operating_margin": "未確認" },
+      "highlights": [
+        "（ダミー）クラウド部門が堅調の想定",
+        "（ダミー）コスト最適化で利益率が改善の想定"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["SPY", "QQQ"],
-      "sources": ["https://example.com/news/ui-002"]
+      "vs_consensus": "（ダミー）小幅上振れ",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/dcld"]
     },
     {
-      "cluster_id": "ui-003",
-      "title": "UI確認用: 原油価格の変動（ダミー）",
-      "category": "commodities",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-02-28 18:30",
-        "published_jst": "2026-03-01 03:30",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "エネルギーコスト → インフレ期待 → 金利",
-        "エネルギーセクター収益 → セクター相対"
+      "company": "Dummy Retail",
+      "ticker": "DRTL",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 02:25",
+      "headline_numbers": { "revenue": "150.0B", "eps": "1.10" },
+      "consensus": { "revenue": "149.0B", "eps": "1.08" },
+      "guidance": "（ダミー）来期見通しは慎重の想定",
+      "key_metrics": { "prime_members": "未確認" },
+      "highlights": [
+        "（ダミー）ECは堅調、広告が増加の想定",
+        "（ダミー）ガイダンスのトーンが注目点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["XLE", "XOM"],
-      "sources": ["https://example.com/news/ui-003"]
+      "vs_consensus": "（ダミー）小幅上振れ",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/drtl"]
     },
     {
-      "cluster_id": "ui-004",
-      "title": "UI確認用: 地政学リスクのヘッドライン（ダミー）",
-      "category": "geopolitics",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-02-28 21:00",
-        "published_jst": "2026-03-01 06:00",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "リスク回避 → ボラ上昇 → 株式下落圧力",
-        "安全資産需要 → 国債/金"
+      "company": "Dummy Pharma",
+      "ticker": "DPHM",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 02:40",
+      "headline_numbers": { "revenue": "9.8B", "eps": "1.55" },
+      "consensus": { "revenue": "9.9B", "eps": "1.58" },
+      "guidance": "未確認（UI確認用）",
+      "key_metrics": { "pipeline": "未確認" },
+      "highlights": [
+        "（ダミー）売上・EPSともに小幅未達の想定",
+        "（ダミー）パイプライン進捗は未確認"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["VIX", "GLD"],
-      "sources": ["https://example.com/news/ui-004"]
+      "vs_consensus": "（ダミー）小幅下振れ",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/dphm"]
     },
     {
-      "cluster_id": "ui-005",
-      "title": "UI確認用: 大手テックの新製品発表（ダミー）",
-      "category": "tech",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 03:30",
-        "published_jst": "2026-03-01 12:30",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "成長期待 → セクター物色 → 個別株の相対パフォーマンス"
+      "company": "ダミー株式会社（自動車）",
+      "ticker": "7203.T",
+      "country": "JP",
+      "report_period": "2026年3月期 第3四半期",
+      "release_time_utc": "2026-03-01 06:00",
+      "headline_numbers": { "revenue": "未確認", "operating_profit": "未確認" },
+      "consensus": "未確認",
+      "guidance": "未確認（UI確認用）",
+      "key_metrics": { "unit_sales": "未確認", "fx_assumption": "未確認" },
+      "highlights": [
+        "（ダミー）北米販売が底堅い想定",
+        "（ダミー）為替前提の説明が注目点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["AAPL", "MSFT"],
-      "sources": ["https://example.com/news/ui-005"]
+      "vs_consensus": "未確認（コンセンサス未提供）",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/7203"]
     },
     {
-      "cluster_id": "ui-006",
-      "title": "UI確認用: 日本の政策関連ニュース（ダミー）",
-      "category": "policy",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 00:10",
-        "published_jst": "2026-03-01 09:10",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "規制/支援策 → セクター見通し → 株価",
-        "財政方針 → 金利・為替 → 外需株"
+      "company": "ダミー株式会社（通信）",
+      "ticker": "9432.T",
+      "country": "JP",
+      "report_period": "2026年3月期 第3四半期",
+      "release_time_utc": "2026-03-01 06:10",
+      "headline_numbers": { "revenue": "未確認", "operating_profit": "未確認" },
+      "consensus": "未確認",
+      "guidance": "未確認（UI確認用）",
+      "key_metrics": { "arpu": "未確認", "churn": "未確認" },
+      "highlights": [
+        "（ダミー）安定収益だが成長率は限定的の想定",
+        "（ダミー）株主還元方針の記載が注目点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["TOPIX"],
-      "sources": ["https://example.com/news/ui-006"]
+      "vs_consensus": "未確認",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/9432"]
     },
     {
-      "cluster_id": "ui-007",
-      "title": "UI確認用: クレジット市場の動き（ダミー）",
-      "category": "credit",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-02-28 16:40",
-        "published_jst": "2026-03-01 01:40",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "スプレッド → リスク許容度 → 株式/ハイイールド"
+      "company": "ダミー株式会社（半導体関連）",
+      "ticker": "8035.T",
+      "country": "JP",
+      "report_period": "2026年3月期 第3四半期",
+      "release_time_utc": "2026-03-01 06:20",
+      "headline_numbers": { "revenue": "未確認", "operating_profit": "未確認" },
+      "consensus": "未確認",
+      "guidance": "（ダミー）通期見通しを据え置きの想定",
+      "key_metrics": { "ai_related": "未確認" },
+      "highlights": [
+        "（ダミー）AI関連需要が追い風の想定",
+        "（ダミー）在庫/受注のコメントが注目点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["HYG", "LQD"],
-      "sources": ["https://example.com/news/ui-007"]
+      "vs_consensus": "未確認",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/8035"]
     },
     {
-      "cluster_id": "ui-008",
-      "title": "UI確認用: 主要企業の決算ヘッドライン（ダミー）",
-      "category": "earnings",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 04:20",
-        "published_jst": "2026-03-01 13:20",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "決算サプライズ → ガイダンス → 株価反応"
+      "company": "Dummy Bank",
+      "ticker": "DBNK",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 03:10",
+      "headline_numbers": { "revenue": "42.0B", "eps": "4.10" },
+      "consensus": { "revenue": "41.5B", "eps": "4.00" },
+      "guidance": "（ダミー）NII見通しは横ばいの想定",
+      "key_metrics": { "net_interest_margin": "未確認", "credit_costs": "未確認" },
+      "highlights": [
+        "（ダミー）利ざやは横ばい、与信コストが焦点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["NVDA", "AMZN"],
-      "sources": ["https://example.com/news/ui-008"]
+      "vs_consensus": "（ダミー）上振れ",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/dbnk"]
     },
     {
-      "cluster_id": "ui-009",
-      "title": "UI確認用: 半導体サプライチェーンの話題（ダミー）",
-      "category": "tech",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-02-28 23:00",
-        "published_jst": "2026-03-01 08:00",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "供給制約 → マージン → 企業収益",
-        "設備投資 → 関連銘柄の相対"
+      "company": "Dummy Energy",
+      "ticker": "DNRG",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 03:25",
+      "headline_numbers": { "revenue": "85.0B", "eps": "2.20" },
+      "consensus": { "revenue": "84.0B", "eps": "2.18" },
+      "guidance": "（ダミー）増配/自社株買いの言及が注目点（未確認）",
+      "key_metrics": { "production": "未確認", "capex": "未確認" },
+      "highlights": [
+        "（ダミー）原油価格前提と株主還元の記載が焦点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["NVDA", "TSM"],
-      "sources": ["https://example.com/news/ui-009"]
+      "vs_consensus": "（ダミー）小幅上振れ",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/dnrg"]
     },
     {
-      "cluster_id": "ui-010",
-      "title": "UI確認用: 為替の急変（ダミー）",
-      "category": "macro",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-02-28 19:15",
-        "published_jst": "2026-03-01 04:15",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "円安/円高 → 輸出企業の採算 → 日本株"
+      "company": "ダミー株式会社（ネット）",
+      "ticker": "6098.T",
+      "country": "JP",
+      "report_period": "2026年3月期 第3四半期",
+      "release_time_utc": "2026-03-01 06:35",
+      "headline_numbers": { "revenue": "未確認", "operating_profit": "未確認" },
+      "consensus": "未確認",
+      "guidance": "未確認（UI確認用）",
+      "key_metrics": { "maus": "未確認", "take_rate": "未確認" },
+      "highlights": [
+        "（ダミー）KPIの伸びが注目点（未確認）",
+        "（ダミー）広告/課金のミックスが注目点（未確認）"
       ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["USDJPY", "7203.T"],
-      "sources": ["https://example.com/news/ui-010"]
-    },
-    {
-      "cluster_id": "ui-011",
-      "title": "UI確認用: 商品市況（ダミー）",
-      "category": "commodities",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 05:30",
-        "published_jst": "2026-03-01 14:30",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "インフレ → 金利 → 株式",
-        "コモディティ関連企業の利益"
-      ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["GLD", "XLB"],
-      "sources": ["https://example.com/news/ui-011"]
-    },
-    {
-      "cluster_id": "ui-012",
-      "title": "UI確認用: 日銀関連ヘッドライン（ダミー）",
-      "category": "central_bank",
-      "what_happened": "UI確認のためのダミー項目です。実際の出来事ではありません。",
-      "times": {
-        "published_utc": "2026-03-01 00:50",
-        "published_jst": "2026-03-01 09:50",
-        "event_utc": "未確認",
-        "event_jst": "未確認"
-      },
-      "impact_pathway": [
-        "国債利回り → 銀行株 → TOPIX",
-        "為替 → 輸出株"
-      ],
-      "ex_post_reaction": "未確認",
-      "tickers": ["TOPIX", "8306.T"],
-      "sources": ["https://example.com/news/ui-012"]
+      "vs_consensus": "未確認",
+      "price_reaction": "未確認",
+      "sources": ["https://example.com/earnings/6098"]
     }
   ]
 }
