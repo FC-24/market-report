@@ -1,0 +1,40 @@
+{
+  "date_jst": "2026-03-01",
+  "items": [
+    {
+      "company": "Dummy Corp",
+      "ticker": "DUMY",
+      "country": "US",
+      "report_period": "Q4 FY2026",
+      "release_time_utc": "2026-03-01 02:00",
+      "highlights": [
+        "（テスト）売上高は前年同期比で増加（数値は未確認）",
+        "（テスト）粗利率の改善が示唆された（未確認）",
+        "（テスト）ガイダンスは据え置き（未確認）"
+      ],
+      "vs_consensus": "未確認",
+      "guidance": "未確認",
+      "price_reaction": "未確認",
+      "sources": [
+        "https://example.com/dummy-earnings-001"
+      ]
+    },
+    {
+      "company": "ダミー株式会社",
+      "ticker": "9999.T",
+      "country": "JP",
+      "report_period": "2026年3月期 第3四半期",
+      "release_time_utc": "2026-03-01 06:00",
+      "highlights": [
+        "（テスト）営業利益は前年同期比で増加（未確認）",
+        "（テスト）主要KPIに改善傾向（未確認）"
+      ],
+      "vs_consensus": "未確認",
+      "guidance": "未確認",
+      "price_reaction": "未確認",
+      "sources": [
+        "https://example.com/dummy-earnings-002"
+      ]
+    }
+  ]
+}
